@@ -18,6 +18,26 @@ In practice, this took X time.  This includes
 Consider the following questions:
 
 1. What is a simple model that would predict this time?
+
+T_s = Startup time
+T_c = Time to count one person
+T_g = Time to gather one count and do arithmetic
+
+Now assume uniform size rows and columns.
+r = size of a row
+c = number of rows
+(So r*c = n, where n is the number of persons).
+
+Then total time = T_s + r*T_c + c*T_g
+
 2. What about a simple model to predict time for one person to count?
+
+n*T_c
+
 3. How big should the class be before the parallel method takes less time?
 
+Solve T_s + r*T_c + c*T_g <= n*T_c for n.
+
+If we assume that T_s is negligible, and that r = c = sqrt(n), this has a nice
+closed form solution of 
+n >= (T_c + T_g)^2 / T_c^2
