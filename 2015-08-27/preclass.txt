@@ -16,11 +16,14 @@ See Q1.sh
     central server; this takes an overhead time alpha per task.
     What is the theoretically achievable throughput (tasks/time)?
 
-Best possible scenario is that the serial server is never idle, so it is scheduling tasks at a rate alpha.  So best possible throughput is jobs finishing at this rate as well, which is tasks/time of 1/alpha.
+Best possible scenario is that the serial server is never idle, so it is 
+scheduling tasks at a rate alpha.  So best possible throughput 
+is jobs finishing at this rate as well, which is tasks/time of 1/alpha.
 
 3.  Under what circumstances is it best to not tune?
 
-When the opportunity cost of spending time on tuning is greater than the future value of faster code.
+When the opportunity cost of spending time on tuning is greater than the 
+future value of faster code.
 
 4.  The class cluster consists of eight nodes and fifteen Xeon Phi
     accelerator boards.  Based on an online search for information on
@@ -29,5 +32,15 @@ When the opportunity cost of spending time on tuning is greater than the future 
     you computed this, and give URLs for where you got the parameters
     in your calculation.  (We will return to this question again after
     we cover some computer architecture.)
+
+Going off of Intel's info for the 5110Ps (https://www-ssl.intel.com/content/www/us/en/benchmarks/server/xeon-phi/xeon-phi-theoretical-maximums.html), 
+each can do 1011 GF/s.  The E5 2620s can do 120 GF/s (http://download.intel.com/support/processors/xeon/sb/xeon_E5-2600.pdf).
+So the total flop rate for our cluster is
+8 * 12 * 120 + 15 * 1011 = 26685 GF/s.
     
 5.  What is the approximate theoretical peak flop rate for your own machine?
+
+My machine has an Core i5 (I5-4258U) Intel processor, which is a dual core 2.4Ghz.
+After much googling I could not find any information on the flop rate, but assuming it can perform 16 operations per cycle like the cores on the cluster, my machine
+would have a peak theoretical flop rate of
+16 * 2.4 * 2 = 76.8 GF/s
