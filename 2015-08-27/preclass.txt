@@ -8,13 +8,19 @@
     you should use a script to produce this plot, with both the serial
     fraction and the maximum number of cores as parameters.
 
+See Q1.sh
+
 2.  Suppose a particular program can be partitioned into perfectly
     independent tasks, each of which takes time tau.  Tasks are
     set up, scheduled, and communicated to p workers at a (serial)
     central server; this takes an overhead time alpha per task.
     What is the theoretically achievable throughput (tasks/time)?
 
+Best possible scenario is that the serial server is never idle, so it is scheduling tasks at a rate alpha.  So best possible throughput is jobs finishing at this rate as well, which is tasks/time of 1/alpha.
+
 3.  Under what circumstances is it best to not tune?
+
+When the opportunity cost of spending time on tuning is greater than the future value of faster code.
 
 4.  The class cluster consists of eight nodes and fifteen Xeon Phi
     accelerator boards.  Based on an online search for information on
