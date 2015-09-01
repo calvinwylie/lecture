@@ -11,12 +11,24 @@ with questions for class!
     you computed this, and give URLs for where you got the parameters
     in your calculation.  (We will return to this question again after
     we cover some computer architecture.)
+
+    See 2015-08-27/preclass.txt
     
 2.  What is the approximate theoretical peak flop rate for your own machine?
+
+    See 2015-08-27/preclass.txt
 
 3.  Suppose there are t tasks that can be executed in a pipeline
     with p stages.  What is the speedup over serial execution of the
     same tasks?
+
+    The serial time is t*p.
+    Parallel time is t + (p-1)
+
+    t*p / (t + (p-1))
+
+    Note if t is much larger than p this is approximately a factor of p speedup,
+    which makes intuitive sense.
 
 4.  Consider the following list of tasks (assume they can't be pipelined):
 
@@ -31,6 +43,10 @@ with questions for class!
     a compiled application?  What is the minimum parallel time given
     an arbitrary number of processors?
 
+Serial time: 1 + 0.5 + 0.25 + 0.5 + 0.5 = 2.75 hr
+Paralell time: Compile GCC (1 hr); Start OpenMPI and OpenBLAS on separate processors, start LAPACK when OpenBLAS is done, LAPACK and OpenMPI both complete after 0.75 hr; Compile application (0.5 hr).
+Total parallel time: 1 + 0.75 + 0.5 = 2.25 hr
+
 5.  Clone the membench repository from GitHub:
 
        git clone git@github.com:cornell-cs5220-f15/membench.git
@@ -42,6 +58,8 @@ with questions for class!
     in the leading comments of the Makefile).  Look at the output file
     timings-heat.pdf; what can you tell about the cache architecture
     on your machine from the plot?
+
+    See timings-heat.pdf and timings-line.pdf
 
 6.  From the cloned repository, check out the totient branch:
 
@@ -69,3 +87,5 @@ with questions for class!
     compiler.  To do this, run "module load cs5220" and run (e.g.)
 
         icc -o centroid centroid.c
+
+    Using icc is giving timings of 0 for every test -- TODO: investigate this
