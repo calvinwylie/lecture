@@ -59,6 +59,8 @@ Total parallel time: 1 + 0.75 + 0.5 = 2.25 hr
     timings-heat.pdf; what can you tell about the cache architecture
     on your machine from the plot?
 
+    See timings-heat.pdf and timings-line.pdf
+
 6.  From the cloned repository, check out the totient branch:
 
        git checkout totient
@@ -85,3 +87,5 @@ Total parallel time: 1 + 0.75 + 0.5 = 2.25 hr
     compiler.  To do this, run "module load cs5220" and run (e.g.)
 
         icc -o centroid centroid.c
+
+    Using icc is giving timings of 0 for every test -- TODO: investigate this

@@ -22,29 +22,45 @@ something into an already-full cache.
 the memory-based AI of this code? (Hint: What is the memory-based AI of just the
 innermost loop?)
 
+(Rescaling to define AI = (# flops) / (# 8 bytes transferred))
+Each dot product requires 2N flops and 2N memory loads since nothing
+we need will be in cache, so the AI is
+2*N / 2*N = 1
 
 2. Now suppose that the cache is substantially larger than 16N, but
 substantially smaller than 8N^2. What is the AI now?
 
+Now, for a given j, when we get to the inner loops, B[k,j] will already
+be in cache, so we will only need N memory loads, so the AI is
+2*N / N = 2
 
 3. Now suppose the cache is large enough to hold all of A, B, and C. What is the
 AI now? (Hint: Writing to a byte of memory not already in the cache incurs two
 memory transfers: one to move the data to the cache for writing, and one to move
 the written data back to main memory.)
 
+Now everything can fit in cache, so the AI is total flops / total data size 
+2*N^3 / 2*N^2 = N
 
 4. Cache overflowing. On my CPU (Intel i7-4700 HQ), L1, L2, and L3 caches are 32
 KB, 256 KB, and 6 MB respectively. What is the largest problem size N that will
 fit in each cache? What is the arithmetic intensity associated with each problem
 size?
 
+L1: sqrt(32000 / 8 / 3) ~= 36x36, AI = 36
+L2: sqrt(256000 / 8 / 3) ~= 103x103, AI = 103
+L3: sqrt(6000000 / 8 / 3)  = 500x500, AI = 500
 
 5. My CPU has 4 cores, each of which can do 8 fused multiply-adds per cycle, has
 a clock rate of 2.4 GHz, and a memory bandwidth of 25.6 GB/s. At what arithmetic
 intensity does my machine become CPU-bound?
 
+Solve 4*8*2.4 / 25.6 = AI
+AI = 30
+So we are CPU bound at AI < 30
 
 6. So, for what size range for N will naive matmul be CPU-bound on my machine?
-
+For N < 30
 
 7. So, what will a plot of Flops/sec vs N look like?
+
