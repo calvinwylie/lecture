@@ -26,3 +26,6 @@
     performance and correctness) in OpenMP codes.  Go through the
     checklist in the paper for omp_mc.c.  What performance mistakes
     are there in the demonstration implementation?
+
+    Use of atomic would be sufficient to update the results instead
+    of critical.
