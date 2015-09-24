@@ -5,6 +5,8 @@ the glider pattern for a few generations.
 
 0.  How much time did you spend on this pre-class exercise, and when?
 
+1-2 hours, the day before lecture.
+
 1.  What are one or two points that you found least clear in the
     9/15 slide decks (including the narration)?
 
@@ -13,6 +15,12 @@ the glider pattern for a few generations.
     timer to the code and run on the totient node.  How many cells per
     second can we update for a board that fits in L3 cache?  For a
     board that does not fit?
+
+L3 Cache on totient is 15MB.  Each char is 1 byte, so the max size
+cache is sqrt(15MB / 2) x sqrt(15MB / 2) ~= 2804 x 2804 bytes
+because we need to store two states of the board.
+
+We can update at roughly 3e-8 seconds per cell on the totient node.
 
 3.  Assuming that we want to advance time by several generations,
     suggest a blocking strategy that would improve the operational

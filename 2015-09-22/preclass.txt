@@ -13,6 +13,8 @@
        time per trial (t_trial), and time to update the global
        counters in the critical section (t_update).
 
+       (t_trial * (N / p)) + (t_update * (N / b)) [b = size of batch]
+
     b) Run the code with a few different parameter values in order
        to estimate N, t_trial, and t_update for this code on
        a totient compute node.
