@@ -17,6 +17,9 @@
        to estimate N, t_trial, and t_update for this code on
        a totient compute node.
 
+       t_update ~= 7e-09
+       t_trial ~= 5e-08
+
     c) Based on your model, suggest a strategy for choosing the batch
        size.  How might you generalize this strategy to automatically
        choose batch sizes for different types of computational
