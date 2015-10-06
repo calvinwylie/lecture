@@ -1,7 +1,12 @@
 0.  How much time did you spend on this pre-class exercise, and when?
+    
+    Monday Oct 5.  1-2 hrs
+    Couldn't get jobs to work yesterday so 
 
 1.  What are one or two points that you found least clear in the
     10/06 slide decks (including the narration)?
+
+    Wasn't sure what you meant by alpha-beta parameters on the MPI slides?
 
 2.  In the upcoming lecture (10/8), we will discuss how to model
     latency and bandwidth of MPI sends and receives using the
@@ -14,6 +19,47 @@
        (under /usr/local/intel).  Using this version of MPI and the
        default PBS files, run the pingpong examples (demo/pingpong).
 
+       I couldn't get 2node to complete properly!  (timed out)
+
+       -bash-4.1$ cat ping-2core.o12490 
+        1 3.1175e-07
+        1001 4.1746e-07
+        2001 4.92344e-07
+        3001 5.68014e-07
+        4001 6.3874e-07
+        5001 7.40299e-07
+        6001 8.2237e-07
+        7001 9.11825e-07
+        8001 1.00506e-06
+        9001 1.11317e-06
+        10001 1.2213e-06
+        11001 1.33891e-06
+        12001 1.4211e-06
+        13001 1.51889e-06
+        14001 1.62848e-06
+        15001 1.75268e-06
+        16001 1.84825e-06
+
+        -bash-4.1$ cat ping-2chip.o12489 
+        1 7.35996e-07
+        1001 1.30151e-06
+        2001 1.61559e-06
+        3001 2.08282e-06
+        4001 2.44214e-06
+        5001 2.82404e-06
+        6001 3.15138e-06
+        7001 3.55113e-06
+        8001 3.92489e-06
+        9001 4.27618e-06
+        10001 4.61941e-06
+        11001 4.99016e-06
+        12001 5.36976e-06
+        13001 5.72626e-06
+        14001 6.0775e-06
+        15001 6.41981e-06
+        16001 6.86494e-06
+        
+
     b) Now do "module load openmpi/1.10.0-icc-15.0.3" after loading
        the CS 5220 module.  Check by typing "which mpicc" that you
        are now using a different version of mpicc.  Compile with
@@ -21,7 +67,50 @@
        you will have to add a module load to the start of the PBS
        scripts).  How do the timings differ from the Intel MPI timings?
 
+       -bash-4.1$ cat ping-2chip.o12543 
+        1 7.89441e-07
+        1001 1.29632e-06
+        2001 1.60532e-06
+        3001 2.07149e-06
+        4001 2.44272e-06
+        5001 2.86918e-06
+        6001 3.12868e-06
+        7001 3.50285e-06
+        8001 3.90885e-06
+        9001 4.23305e-06
+        10001 4.57814e-06
+        11001 4.90885e-06
+        12001 5.29518e-06
+        13001 5.65887e-06
+        14001 6.00649e-06
+        15001 6.37681e-06
+        16001 6.81723e-06
+
+        -bash-4.1$ cat ping-2core.o12544
+        1 3.0149e-07
+        1001 4.11631e-07
+        2001 4.93555e-07
+        3001 5.65735e-07
+        4001 6.31369e-07
+        5001 7.2675e-07
+        6001 8.1748e-07
+        7001 9.09386e-07
+        8001 9.97385e-07
+        9001 1.1059e-06
+        10001 1.22725e-06
+        11001 1.33564e-06
+        12001 1.41298e-06
+        13001 1.52663e-06
+        14001 1.6396e-06
+        15001 1.73626e-06
+        16001 1.83775e-06
+        
+        Generally 3-5x slower than Intel MPI compiler.
+
     c) When running at the peak rate (e.g. 16 double precision
        flops/cycle), how many (double precision) floating point ops
        could two totient cores do in the minimal time required for one
        MPI message exchange?
+
+       With Intel mpicc,
+       16 * 2.8e9 * 3.1175e-07 = 13966 floating point ops
