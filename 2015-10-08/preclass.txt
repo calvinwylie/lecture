@@ -17,9 +17,19 @@
 
     a) In your own words, describe what ring.c is doing.
 
+      Each processor has it's "own" data.  We connect the processors in
+      a ring and pass each data piece around the ring until each processor
+      has interacted with all the data.
+
     b) How might you modify the code to have the same computational
        pattern, but using non-blocking communication rather than
        MPI_Sendrecv?  Note that according to the MPI standard,
        one isn't supposed to read from a buffer that is being
        handled by a non-blocking send, so it is probably necessary
        to use three temporary buffers rather than the current two.
+
+       We only need to wait on receiving data, after we've dealt
+       with our current data we can send it and move on to the next data
+       piece without waiting for the send to complete.
+       The receive buffer would need to be a queue.
+       
